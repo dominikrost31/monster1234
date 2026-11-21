@@ -1,0 +1,16 @@
+name: Build NDS
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: skylyrac/blocksds:slim-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build ROM
+        run: make
+      - uses: actions/upload-artifact@v4
+        with:
+          name: monsterspiel-nds
+          path: "*.nds"
